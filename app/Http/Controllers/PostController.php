@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -19,4 +21,22 @@ class PostController extends Controller
 
         return view('posts.show', compact('post'));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:20',
+            'content' => 'required|max:255',
+        ]);
+
+        Post::create([
+            'user_id' => Auth::id(),
+            'name' => $request->name,
+            'content' => $request->content,
+        ]);
+      
+        return redirect()->route('posts.index')->with('success', '投稿を作成しました！');
+        
+    }
+
 }
