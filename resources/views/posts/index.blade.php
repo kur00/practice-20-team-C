@@ -53,11 +53,11 @@
             @if ($post->tags->isNotEmpty())
                 <p><small>タグ:</small>
                 @foreach ($post->tags as $tag)
-                    <span class="badge bg-secondary">{{ $tag->name }}</span>
+                    <a href="{{ route('tag.show', $tag->id) }}" class="badge bg-secondary">{{ $tag->name }}</a>
                 @endforeach
                 </p>
             @else
-                <p><small>タグ:</small> なし</p>
+                <p><small>タグ:</sz> なし</p>
             @endif
             <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-outline-primary">投稿内容</a>
             </div>
