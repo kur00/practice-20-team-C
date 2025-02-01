@@ -53,7 +53,7 @@
             @if ($post->tags->isNotEmpty())
                 <p><small>タグ:</small>
                 @foreach ($post->tags as $tag)
-                <a href="{{ route('posts.searchByTag', ['tag' => $tag->name]) }}" class="badge bg-secondary text-decoration-none">{{ $tag->name }}</a>
+                    <span class="badge bg-secondary">{{ $tag->name }}</span>
                 @endforeach
                 </p>
             @else
