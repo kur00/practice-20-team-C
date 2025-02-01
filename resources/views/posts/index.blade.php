@@ -49,6 +49,16 @@
             <p>{{ $post->content }}</p>
             <small class="text-muted">投稿者: {{  $post->user->name }} / 投稿日時: {{ $post->created_at->format('y-m-d H:i')}}</small>
             <br>
+            <!-- タグの表示 -->
+            @if ($post->tags->isNotEmpty())
+                <p><small>タグ:</small>
+                @foreach ($post->tags as $tag)
+                <a href="{{ route('posts.searchByTag', ['tag' => $tag->name]) }}" class="badge bg-secondary text-decoration-none">{{ $tag->name }}</a>
+                @endforeach
+                </p>
+            @else
+                <p><small>タグ:</small> なし</p>
+            @endif
             <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-outline-primary">投稿内容</a>
             </div>
         </div>
