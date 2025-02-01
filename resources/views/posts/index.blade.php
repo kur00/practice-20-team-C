@@ -21,6 +21,22 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
+        <!-- タグ記入欄 -->
+        <div class="mb-3">
+            <input type="text" name="tags" class="form-control @error('tags') is-invalid @enderror" placeholder="タグを入力（カンマで区切ってください）">
+            @error('tags')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- 画像入力欄 -->
+        <div class="mb-3">
+            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+            @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
         <button type="submit" class="btn btn-primary">投稿</button>
     </form>
 
