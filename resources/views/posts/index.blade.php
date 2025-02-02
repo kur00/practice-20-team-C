@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
     <h1 class="mb-4">掲示板</h1>
@@ -6,10 +7,10 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <!-- 投稿フォーム -->
-    <form method="POST" action="{{ route('posts.store') }}">
+    <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <input type="text" name="name" class="form-control @error ('name') is-invalid @enderror" placeholder="タイトル">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="タイトル">
             @error('name')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -41,27 +42,31 @@
     </form>
 
     <hr>
-    <!-- 投群一覧 -->
+    <!-- 投稿一覧 -->
     <h2>投稿一覧</h2>
     @foreach ($posts as $post)
         <div class="card mb-3">
             <div class="card-body">
-            <p>{{ $post->content }}</p>
-            <small class="text-muted">投稿者: {{  $post->user->name }} / 投稿日時: {{ $post->created_at->format('y-m-d H:i')}}</small>
-            <br>
-            <!-- タグの表示 -->
-            @if ($post->tags->isNotEmpty())
-                <p><small>タグ:</small>
-                @foreach ($post->tags as $tag)
-                    <a href="{{ route('tag.show', $tag->id) }}" class="badge bg-secondary">{{ $tag->name }}</a>
-                @endforeach
-                </p>
-            @else
-                <p><small>タグ:</sz> なし</p>
-            @endif
-            <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-outline-primary">投稿内容</a>
+                <h5>{{ $post->name }}</h5>
+                <p>{{ $post->content }}</p>
+                <small class="text-muted">投稿者: {{ $post->user->name }} / 投稿日時: {{ $post->created_at->format('y-m-d H:i') }}</small>
+                <br>
+                <!-- タグの表示 -->
+                @if ($post->tags->isNotEmpty())
+                    <p><small>タグ:</small>
+                    @foreach ($post->tags as $tag)
+                        <a href="{{ route('tag.show', $tag->id) }}" class="badge bg-secondary">{{ $tag->name }}</a>
+                    @endforeach
+                    </p>
+                @else
+                    <p><small>タグ:</small> なし</p>
+                @endif
+                <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-outline-primary">投稿内容</a>
             </div>
         </div>
     @endforeach
+    <div class="mt-3">
+        <a href="{{ route('profile.edit') }}" class="btn btn-primary">プロフィール編集</a>
+    </div>
 </div>
 @endsection
