@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'content','user_id'];
+    protected $fillable = ['name', 'content','user_id','image'];
 
     //コメントのリレーション
     public function comments(): HasMany

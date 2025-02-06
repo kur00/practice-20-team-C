@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger(column: 'user_id');
             $table->string(column:'name');
             $table->text(column:'content');
+            $table->string('image')->nullable(); // 画像のカラム (nullableなので、画像がない投稿も許可)
             $table->timestamps();
         });
     }
