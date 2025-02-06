@@ -44,6 +44,7 @@ class PostController extends Controller
             'user_id' => Auth::id(),
             'name' => $request->name,
             'content' => $request->content,
+            'image' => $imagePath, // 画像パスを保存
         ]);
 
         // タグ処理

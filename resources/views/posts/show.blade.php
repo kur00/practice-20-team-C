@@ -11,6 +11,12 @@
         <h1 class="text-3xl font-bold text-gray-800">{{ $post->name }}</h1>
         <p class="mt-4 text-gray-700">{{ $post->content }}</p>
         <hr class="my-6 border-gray-300">
+<!-- 画像の表示 -->
+        @if ($post->image)
+            <div class="mt-6">
+                <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="w-full h-auto rounded-lg shadow-lg">
+            </div>
+        @endif
 
         <h2 class="text-2xl font-semibold text-gray-800">コメント</h2>
         @if ($post->comments->isEmpty())
